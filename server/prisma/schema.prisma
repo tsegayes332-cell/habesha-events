@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id              Int      @id @default(autoincrement())
+  title           String
+  description     String
+  category        String
+  city            String
+  location_name   String
+  start_date      DateTime
+  end_date        DateTime
+  image_url       String?
+  ticket_url      String?
+  organizer_name  String
+  organizer_email String
+  is_free         Boolean  @default(true)
+  status          String   @default("pending")
+  created_at      DateTime @default(now())
+  
+  // New Ticket Fields
+  ticket_price    Float?
+  ticket_capacity Int?
+  tickets_sold    Int      @default(0)
+  tickets         Ticket[]
+}
+
+model Ticket {
+  id           Int      @id @default(autoincrement())
+  event_id     Int
+  event        Event    @relation(fields: [event_id], references: [id])
+  buyer_name   String
+  buyer_email  String
+  buyer_phone  String
+  quantity     Int      @default(1)
+  total_price  Float
+  ticket_code  String   @unique
+  status       String   @default("pending")
+  tx_ref       String?
+  created_at   DateTime @default(now())
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}

@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;900&family=Noto+Sans+Ethiopic:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #D4A843;
+  --color-gold-hover: #B88E2D;
+  --color-imperial-green: #004D2C;
+  --color-charcoal: #1A1A1A;
+  --color-habesha-white: #FAF8F3;
+  --color-cotton-cream: #F5F2EB;
+  --color-patriot-red: #C1272D;
+  --color-ethiopian-red: #C1272D;
+  --color-card-bg: #F5F2EB;
+  --color-cream: #FAF8F3;
+  
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: "Inter", sans-serif;
+  --font-ethiopic: "Noto Sans Ethiopic", sans-serif;
+
+  --radius-card: 0.75rem;
+  --radius-button: 0.375rem;
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+}
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  .animate-marquee {
+    animation: marquee 18s linear infinite;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-habesha-white text-charcoal font-inter antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(212, 168, 67, 0.14), transparent 28%),
+      radial-gradient(circle at top right, rgba(193, 39, 45, 0.08), transparent 22%),
+      linear-gradient(180deg, #fffdf7 0%, #faf8f3 46%, #f5f2eb 100%);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair font-bold;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-gold text-white font-semibold py-2.5 px-6 rounded-md hover:bg-gold-hover transition-all text-sm inline-flex items-center;
+    box-shadow: 0 18px 40px rgba(212, 168, 67, 0.24);
+  }
+  .btn-primary {
+    @apply bg-imperial-green text-white font-bold py-3 px-8 rounded-md hover:bg-imperial-green/90 transition-all text-sm inline-flex items-center justify-center;
+    box-shadow: 0 18px 40px rgba(0, 77, 44, 0.18);
+  }
+  .btn-secondary {
+    @apply bg-charcoal/10 text-charcoal font-bold py-3 px-8 rounded-md hover:bg-charcoal/20 transition-all text-sm inline-flex items-center justify-center;
+  }
+  .btn-outline-gold {
+    @apply border border-gold/30 text-imperial-green bg-white/80 font-bold py-3 px-8 rounded-md transition-all text-sm inline-flex items-center justify-center;
+  }
+  .btn-outline-gold:hover {
+    @apply border-gold bg-gold text-white;
+  }
+  .habesha-card {
+    @apply bg-white rounded-xl border border-black/5 overflow-hidden transition-all;
+    box-shadow: 0 16px 50px rgba(17, 24, 39, 0.06);
+  }
+  .habesha-input {
+    @apply bg-white border border-charcoal/10 rounded-md px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors;
+  }
+  .search-pill {
+    @apply bg-white border border-black/10 rounded-full px-4 py-2 flex items-center space-x-2 text-sm focus-within:border-gold/50 transition-all;
+  }
+  .section-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-imperial-green/10 bg-white/80 px-4 py-2 text-[10px] font-black uppercase tracking-[0.25em] text-imperial-green;
+  }
+  .editorial-panel {
+    @apply rounded-[28px] border border-black/5 bg-white/80 backdrop-blur-sm;
+    box-shadow: 0 24px 70px rgba(17, 24, 39, 0.07);
+  }
+  .floating-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/12 px-4 py-2 text-[10px] font-black uppercase tracking-[0.25em] text-white backdrop-blur-md;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ETHIOPIAN CULTURAL PATTERNS (TIBEB / TILET)
+   ═══════════════════════════════════════════ */
+
+/* 
+  African geometric pattern strip — inspired by Ethiopian/East African 
+  tribal textile art with interlocking diamonds, zigzags, and crosses.
+  Dark green base with gold geometric motifs.
+*/
+.tibeb-strip {
+  height: 40px;
+  background-color: #004D2C;
+  position: relative;
+  background-image:
+    /* Large center diamonds */
+    url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- outer diamond --%3E%3Cpath d='M30 2L50 20L30 38L10 20Z' fill='none' stroke='%23D4A843' stroke-width='1.5'/%3E%3C!-- inner diamond --%3E%3Cpath d='M30 8L42 20L30 32L18 20Z' fill='%23D4A843' opacity='0.15'/%3E%3C!-- inner cross --%3E%3Cpath d='M30 12L36 20L30 28L24 20Z' fill='%23D4A843' opacity='0.3'/%3E%3C!-- center dot --%3E%3Ccircle cx='30' cy='20' r='2' fill='%23D4A843' opacity='0.6'/%3E%3C!-- corner triangles --%3E%3Cpath d='M0 0L10 20L0 40' fill='none' stroke='%23D4A843' stroke-width='1' opacity='0.4'/%3E%3Cpath d='M60 0L50 20L60 40' fill='none' stroke='%23D4A843' stroke-width='1' opacity='0.4'/%3E%3C!-- horizontal lines --%3E%3Cline x1='0' y1='1' x2='60' y2='1' stroke='%23D4A843' stroke-width='2'/%3E%3Cline x1='0' y1='39' x2='60' y2='39' stroke='%23D4A843' stroke-width='2'/%3E%3C!-- small accent diamonds at edges --%3E%3Cpath d='M0 20L5 15L10 20L5 25Z' fill='%23D4A843' opacity='0.2'/%3E%3Cpath d='M50 20L55 15L60 20L55 25Z' fill='%23D4A843' opacity='0.2'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 60px 40px;
+}
+
+/* Thinner tibeb accent — zigzag weave */
+.tibeb-line {
+  height: 8px;
+  background-color: #D4A843;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='16' height='8' viewBox='0 0 16 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 8L4 0L8 8L12 0L16 8' fill='none' stroke='%23004D2C' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+}
+
+/* Tilet cross-stitch border for cards */
+.tilet-card {
+  border-top: 4px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+.tilet-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='16' height='4' viewBox='0 0 16 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='4' height='4' fill='%23D4A843'/%3E%3Crect x='4' y='0' width='4' height='4' fill='%23004D2C'/%3E%3Crect x='8' y='0' width='4' height='4' fill='%23D4A843'/%3E%3Crect x='12' y='0' width='4' height='4' fill='%23C1272D'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 16px 4px;
+  z-index: 10;
+}
+
+/* Background pattern using the shared Ethiopian tile image asset */
+.bg-cross-pattern {
+  background-image: url('/ethiopian-pattern.png');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: auto;
+}
+
+/* Subtle Ethiopian woven texture background — very light */
+.bg-shemma {
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' fill='none' stroke='%23D4A843' stroke-width='0.3' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+.shadow-gold {
+  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.15);
+}
+
+.shadow-imperial {
+  box-shadow: 0 20px 55px rgba(0, 77, 44, 0.12);
+}
+
+.editorial-glow {
+  position: relative;
+}
+
+.editorial-glow::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -15% auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.35) 0%, rgba(212, 168, 67, 0) 70%);
+  pointer-events: none;
+}
+
+/* Scroll Fade-In Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+  filter: blur(5px);
+  transition: all 0.7s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.marquee-shell {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 24s linear infinite;
+}
+
+.marquee-shell:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.tilt-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.tilt-card:hover {
+  transform: translateY(-8px) rotate(-0.7deg);
+  box-shadow: 0 28px 80px rgba(17, 24, 39, 0.12);
+}
+
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(0);
+  animation: drift 12s ease-in-out infinite;
+}
+
+.orb-delay {
+  animation-delay: -4s;
+}
+
+.mesh-dots {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(0, 77, 44, 0.14) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* Custom Scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes marquee-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) scale(1.04);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ENHANCED ETHIOPIAN CULTURAL DESIGN ELEMENTS
+   Incorporating traditional Ethiopian cross (Coptic cross),
+   woven patterns (tibeb), and geometric textile art (tilet)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Ethiopian Cross — Sacred geometric symbol */
+.ethiopian-cross {
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- Vertical bar --%3E%3Crect x='14' y='4' width='4' height='24' fill='%23D4A843'/%3E%3C!-- Horizontal bar --%3E%3Crect x='4' y='14' width='24' height='4' fill='%23D4A843'/%3E%3C!-- Corner ornaments --%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%23004D2C'/%3E%3Ccircle cx='24' cy='8' r='1.5' fill='%23004D2C'/%3E%3Ccircle cx='8' cy='24' r='1.5' fill='%23004D2C'/%3E%3Ccircle cx='24' cy='24' r='1.5' fill='%23004D2C'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 32px 32px;
+}
+
+/* Dense Ethiopian textile weave pattern */
+.weave-pattern {
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h6v6H0zM12 0h6v6h-6zM0 12h6v6H0zM12 12h6v6h-6z' fill='%23D4A843' opacity='0.1'/%3E%3Cline x1='0' y1='0' x2='24' y2='24' stroke='%23D4A843' stroke-width='0.5' opacity='0.15'/%3E%3Cline x1='24' y1='0' x2='0' y2='24' stroke='%23D4A843' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 24px 24px;
+}
+
+/* Ethiopian geometric corner ornament */
+.corner-ornament {
+  width: 40px;
+  height: 40px;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- Outer square --%3E%3Crect x='2' y='2' width='36' height='36' fill='none' stroke='%23D4A843' stroke-width='1.5'/%3E%3C!-- Inner square --%3E%3Crect x='8' y='8' width='24' height='24' fill='none' stroke='%23D4A843' stroke-width='1' opacity='0.6'/%3E%3C!-- Center diamond --%3E%3Cpath d='M20 12L28 20L20 28L12 20Z' fill='%23D4A843' opacity='0.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Decorative Ethiopian stripe band */
+.stripe-band {
+  height: 8px;
+  background: linear-gradient(90deg, 
+    #004D2C 0%,
+    #D4A843 25%,
+    #C1272D 50%,
+    #D4A843 75%,
+    #004D2C 100%);
+}
+
+/* Ethiopian cultural accent border */
+.cultural-border {
+  border-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23D4A843'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23004D2C'/%3E%3C/svg%3E") 1;
+}
+
+/* Amharic script inspired decorative element */
+.ethiopic-ornament {
+  position: relative;
+}
+.ethiopic-ornament::before {
+  content: '⮔';
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(212, 168, 67, 0.2);
+}
+
+/* Radial burst pattern (inspired by Ethiopian sun) */
+.sun-burst {
+  background: 
+    conic-gradient(from 0deg, #D4A843 0deg 6deg, transparent 6deg 12deg) center / 100% 100%,
+    conic-gradient(from 45deg, rgba(212, 168, 67, 0.15) 0deg 3deg, transparent 3deg 6deg) center / 100% 100%;
+  background-repeat: repeat;
+}
+
+/* ── Injera Texture ──────────────────────────────────────────────────────────
+   Mimics the spongy, bubbly surface of Ethiopian injera flatbread.
+   Use on dark or warm-toned backgrounds. */
+.injera-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='15' cy='12' r='5' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.10'/%3E%3Ccircle cx='42' cy='8' r='3' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.08'/%3E%3Ccircle cx='75' cy='15' r='7' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.09'/%3E%3Ccircle cx='105' cy='10' r='4' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.07'/%3E%3Ccircle cx='28' cy='35' r='8' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.11'/%3E%3Ccircle cx='60' cy='30' r='4' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.08'/%3E%3Ccircle cx='92' cy='38' r='6' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.09'/%3E%3Ccircle cx='10' cy='58' r='4' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.08'/%3E%3Ccircle cx='50' cy='55' r='9' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.12'/%3E%3Ccircle cx='85' cy='60' r='3.5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.07'/%3E%3Ccircle cx='112' cy='52' r='6' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.08'/%3E%3Ccircle cx='20' cy='80' r='6' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.10'/%3E%3Ccircle cx='65' cy='82' r='4' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.08'/%3E%3Ccircle cx='100' cy='78' r='7' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.09'/%3E%3Ccircle cx='38' cy='100' r='5' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.08'/%3E%3Ccircle cx='80' cy='105' r='8' fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.10'/%3E%3Ccircle cx='115' cy='100' r='3' fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+/* ── Mesob Basket Weave ──────────────────────────────────────────────────────
+   Traditional Ethiopian mesob (woven basket) over-under weave pattern.
+   Use on light backgrounds (event cards, panels). */
+.mesob-weave {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect x='0' y='0' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.13'/%3E%3Crect x='24' y='0' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.13'/%3E%3Crect x='12' y='8' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.10'/%3E%3Crect x='36' y='8' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.10'/%3E%3Crect x='0' y='16' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.13'/%3E%3Crect x='24' y='16' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.13'/%3E%3Crect x='12' y='24' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.10'/%3E%3Crect x='36' y='24' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.10'/%3E%3Crect x='0' y='32' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.13'/%3E%3Crect x='24' y='32' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.13'/%3E%3Crect x='12' y='40' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.10'/%3E%3Crect x='36' y='40' width='12' height='8' rx='1' fill='%23C8922A' opacity='0.10'/%3E%3Cline x1='0' y1='0' x2='48' y2='0' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='8' x2='48' y2='8' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='16' x2='48' y2='16' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='24' x2='48' y2='24' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='32' x2='48' y2='32' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='40' x2='48' y2='40' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='48' x2='48' y2='48' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='0' y1='0' x2='0' y2='48' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='12' y1='0' x2='12' y2='48' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='24' y1='0' x2='24' y2='48' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='36' y1='0' x2='36' y2='48' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3Cline x1='48' y1='0' x2='48' y2='48' stroke='%23C8922A' stroke-width='0.6' opacity='0.20'/%3E%3C/svg%3E");
+  background-size: 48px 48px;
+}
+
+/* Mesob weave on dark backgrounds (lighter strokes) */
+.mesob-weave-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Crect x='0' y='0' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.18'/%3E%3Crect x='24' y='0' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.18'/%3E%3Crect x='12' y='8' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.12'/%3E%3Crect x='36' y='8' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.12'/%3E%3Crect x='0' y='16' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.18'/%3E%3Crect x='24' y='16' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.18'/%3E%3Crect x='12' y='24' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.12'/%3E%3Crect x='36' y='24' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.12'/%3E%3Crect x='0' y='32' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.18'/%3E%3Crect x='24' y='32' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.18'/%3E%3Crect x='12' y='40' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.12'/%3E%3Crect x='36' y='40' width='12' height='8' rx='1' fill='%23D4A843' opacity='0.12'/%3E%3Cline x1='0' y1='0' x2='48' y2='0' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='8' x2='48' y2='8' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='16' x2='48' y2='16' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='24' x2='48' y2='24' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='32' x2='48' y2='32' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='40' x2='48' y2='40' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='48' x2='48' y2='48' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='0' y1='0' x2='0' y2='48' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='12' y1='0' x2='12' y2='48' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='24' y1='0' x2='24' y2='48' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3Cline x1='36' y1='0' x2='36' y2='48' stroke='%23D4A843' stroke-width='0.8' opacity='0.25'/%3E%3C/svg%3E");
+  background-size: 48px 48px;
+}
+
+/* ═══════════════════════════════════════════
+   SMOOTH ENTRANCE + EYE-CATCHING MOTION
+   ═══════════════════════════════════════════ */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33%      { transform: translate3d(5%, -4%, 0) scale(1.1); }
+  66%      { transform: translate3d(-4%, 3%, 0) scale(0.95); }
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  will-change: transform;
+  animation: aurora-drift 16s ease-in-out infinite;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1.02); }
+  to   { transform: scale(1.14); }
+}
+.kenburns {
+  animation: kenburns 18s ease-in-out infinite alternate;
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.float-slow {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.55s ease;
+}
+.btn-shine:hover::after {
+  left: 130%;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.text-shimmer-gold {
+  background: linear-gradient(100deg, #D4A843 20%, #F5E3B6 50%, #D4A843 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.hover-lift {
+  transition: transform 0.45s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgba(212, 168, 67, 0.18);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  pointer-events: none;
+}
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #D4A843, #C1272D, #004D2C, #D4A843);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  transition: width 0.08s linear;
+}
+
+/* Featured events marquee card hover */
+.marquee-card {
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+.marquee-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(17, 24, 39, 0.22);
+}
